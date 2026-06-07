@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theodia.app/schemas/manifest.schema.json",
+  "title": "Theodia LLM manifest",
+  "description": "Describes a Bible-specialized GGUF model distributed as GitHub Release assets. Read by the Theodia mobile app to download, verify, and load a model.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "displayName",
+    "description",
+    "releaseOwner",
+    "releaseRepo",
+    "releaseTag",
+    "parts",
+    "totalSizeBytes",
+    "sourceUrl"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Globally unique, lowercase, stable across versions. Renaming this breaks every existing install.",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Name shown in the app's model picker.",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "description": {
+      "type": "string",
+      "description": "1-2 sentence description for the picker UI.",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "releaseOwner": {
+      "type": "string",
+      "description": "GitHub org/user that owns the release repo.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "releaseRepo": {
+      "type": "string",
+      "description": "GitHub repo name where the release lives.",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "releaseTag": {
+      "type": "string",
+      "description": "Semver with a 'v' prefix, matching the git tag pushed for this release.",
+      "pattern": "^v\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9.-]+)?$"
+    },
+    "parts": {
+      "type": "array",
+      "description": "Every part in strict concatenation order. Names match the asset names attached to the GitHub Release — GitHub flattens uploads, so the on-disk dist/<id>/path is NOT preserved. Bare 'part-NNN' is the common case.",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[\\w./-]*part-\\d{3,}$"
+      },
+      "uniqueItems": true
+    },
+    "totalSizeBytes": {
+      "type": "integer",
+      "description": "Sum of every part's byte size. Drives the download progress bar.",
+      "exclusiveMinimum": 0,
+      "maximum": 10995116277760
+    },
+    "sha256": {
+      "type": "string",
+      "description": "SHA-256 of the concatenated file (same as the unsharded .gguf). Omit the field if not set; do not use an empty string.",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "sourceUrl": {
+      "type": "string",
+      "description": "URL the original .gguf was downloaded from (Hugging Face model page).",
+      "format": "uri",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "sourceHash": {
+      "type": "string",
+      "description": "Commit or revision hash pinned at the source repo (e.g. Hugging Face). Optional.",
+      "pattern": "^[a-f0-9]+$",
+      "maxLength": 128
+    }
+  }
+}

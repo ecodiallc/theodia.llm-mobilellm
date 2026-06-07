@@ -1,0 +1,5 @@
+**/part-*
+*.gguf
+roundtrip.gguf
+._*
+.DS_Store
