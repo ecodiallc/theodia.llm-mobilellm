@@ -1,6 +1,6 @@
 ## MobileLLM 1B (Q8_0)
 
-1B-parameter Bible-specialized model, Q8_0 quantization. ~1.11 GB on device.
+Upstream Meta MobileLLM-1B base model, Q8_0 quantization. ~1.11 GB on device.
 
 ### Source
 
@@ -13,21 +13,22 @@
 {
   "id": "mobilellm-1b-q8-0",
   "displayName": "MobileLLM 1B (Q8_0)",
-  "description": "1B-parameter Bible-specialized model, Q8_0 quantization. ~1.11 GB on device.",
+  "description": "Upstream Meta MobileLLM-1B base model, Q8_0 quantization. ~1.11 GB on device.",
   "releaseOwner": "ecodiallc",
   "releaseRepo": "theodia.llm-mobilellm",
   "releaseTag": "v1.0.0",
   "parts": [
-    "dist/mobilellm-1b-q8-0/part-001",
-    "dist/mobilellm-1b-q8-0/part-002"
+    "part-001",
+    "part-002"
   ],
-  "totalSizeBytes": 1190000000,
+  "totalSizeBytes": 1112985888,
+  "sha256": "2e77b14af9873037cec76bf74d443295061aa03db5625da18911129d799b25f2",
   "sourceUrl": "https://huggingface.co/pjh64/MobileLLM_1B-GGUF"
 }
 ```
 
 ### Notes
 
-- 2 parts in `dist/mobilellm-1b-q8-0/` (largest 1 GB, last part smaller).
-- Total size: 1190000000 bytes (~1.11 GB).
-- SHA-256 of concatenated file: (to be filled in after `/process-model` run).
+- 2 parts in `dist/mobilellm-1b-q8-0/` (largest 1,073,741,824 bytes, last part smaller at 39,244,064 bytes).
+- Total size: 1,112,985,888 bytes (~1.04 GiB).
+- SHA-256 of concatenated file: `2e77b14af9873037cec76bf74d443295061aa03db5625da18911129d799b25f2` (verified after download).
